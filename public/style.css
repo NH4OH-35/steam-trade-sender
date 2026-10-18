@@ -1,0 +1,437 @@
+:root {
+  color-scheme: dark;
+  font-family: Segoe UI, system-ui, sans-serif;
+  background: #10141d;
+  color: #e7ecf5;
+  font-size: 15px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  max-width: 1160px;
+  margin: auto;
+  padding: 44px 26px;
+}
+
+header,
+.section-title,
+.footer,
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+header {
+  margin-bottom: 26px;
+}
+
+h1 {
+  font-size: 36px;
+  letter-spacing: -1px;
+  margin: 8px 0;
+}
+
+h2 {
+  font-size: 22px;
+  margin: 7px 0;
+}
+
+p {
+  line-height: 1.6;
+  color: #b3bed1;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #7ca9fd;
+  font-weight: 700;
+}
+
+.badge {
+  border: 1px solid #344057;
+  border-radius: 24px;
+  padding: 7px 13px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.notice {
+  background: #1b2941;
+  border-left: 3px solid #6e9fff;
+  border-radius: 6px;
+  padding: 16px 20px;
+  line-height: 1.6;
+  color: #c8d7f1;
+}
+
+.accounts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.panel,
+.account {
+  background: #191f2b;
+  border: 1px solid #2a3446;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.account {
+  margin: 0;
+}
+
+.account h2 {
+  margin-top: 0;
+}
+
+.account form {
+  display: grid;
+  gap: 12px;
+}
+
+.status {
+  min-height: 24px;
+  font-size: 13px;
+  color: #a8bfe3;
+  overflow-wrap: anywhere;
+}
+
+.steamid {
+  font-family: monospace;
+  font-size: 12px;
+  min-height: 18px;
+}
+
+input,
+select,
+button {
+  font: inherit;
+  border-radius: 6px;
+  border: 1px solid #3b4962;
+  padding: 11px 13px;
+}
+
+input,
+select {
+  background: #101722;
+  color: #e7ecf5;
+  width: 100%;
+}
+
+button {
+  cursor: pointer;
+  background: #75a5ff;
+  color: #101c31;
+  font-weight: 650;
+  border-color: transparent;
+  white-space: nowrap;
+}
+
+button:hover {
+  filter: brightness(1.1);
+}
+
+button:disabled {
+  opacity: .45;
+  cursor: default;
+}
+
+.secondary {
+  background: #252f40;
+  color: #d4dfef;
+  border-color: #39465c;
+}
+
+label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  color: #c5cfdf;
+}
+
+.toolbar {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.search {
+  flex: 1;
+  min-width: 180px;
+}
+
+.toolbar.small {
+  font-size: 13px;
+}
+
+.small button {
+  font-size: 12px;
+  padding: 7px 12px;
+}
+
+.inventory {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(156px, 1fr));
+  gap: 12px;
+  max-height: 520px;
+  overflow: auto;
+  padding: 4px;
+}
+
+.item {
+  position: relative;
+  background: #111925;
+  border: 1px solid #303c50;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  align-content: start;
+  gap: 6px;
+}
+
+.item:has(input:checked) {
+  border-color: #8fb4ff;
+  background: #20314a;
+}
+
+.item.locked {
+  opacity: .5;
+  cursor: default;
+}
+
+.item input {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 17px;
+  height: 17px;
+  accent-color: #8fb4ff;
+}
+
+.item img,
+.item-image-fallback {
+  height: 90px;
+  width: 100%;
+}
+
+.item img {
+  object-fit: contain;
+}
+
+.item-image-fallback {
+  display: grid;
+  place-items: center;
+  color: #a9bad3;
+  font-size: 11px;
+  text-align: center;
+}
+
+.item-name {
+  font-size: 12px;
+  line-height: 1.4;
+  min-height: 34px;
+  overflow-wrap: anywhere;
+}
+
+.item-meta {
+  font-size: 11px;
+  color: #a9bad3;
+}
+
+.muted {
+  color: #91a0b9;
+  font-size: 13px;
+}
+
+.footer {
+  border-top: 1px solid #303a4e;
+  margin-top: 24px;
+  padding-top: 16px;
+}
+
+.footer p {
+  font-size: 12px;
+  max-width: 650px;
+}
+
+.record {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) minmax(160px, 1fr) auto;
+  gap: 14px;
+  padding: 14px 0;
+  border-top: 1px solid #303a4e;
+  align-items: center;
+  font-size: 13px;
+}
+
+.record small {
+  display: block;
+  color: #9eadc5;
+  margin-top: 5px;
+}
+
+.record-actions {
+  display: grid;
+  gap: 8px;
+}
+
+a {
+  color: #94b9ff;
+}
+
+.error {
+  padding: 14px;
+  background: #452b2f;
+  border: 1px solid #89545c;
+  border-radius: 7px;
+  overflow-wrap: anywhere;
+  color: #ffd6db;
+  margin-bottom: 16px;
+}
+
+#message {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #23344d;
+  border: 1px solid #6c90c3;
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 90vw;
+  z-index: 3;
+  box-shadow: 0 4px 30px #0008;
+}
+
+.page-footer {
+  font-size: 12px;
+  color: #8393ac;
+  line-height: 1.6;
+}
+
+dialog {
+  background: #1b2432;
+  color: #e7ecf5;
+  border: 1px solid #4a5c7d;
+  border-radius: 12px;
+  padding: 28px;
+  max-width: 620px;
+  width: 90vw;
+}
+
+dialog::backdrop {
+  background: #000a;
+}
+
+#review-items {
+  max-height: 220px;
+  overflow: auto;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+:root .qr-panel {
+  margin: 18px 0;
+  text-align: center;
+}
+
+.qr-panel img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+
+.qr-panel p {
+  font-size: 12px;
+}
+
+.account details {
+  margin: 16px 0;
+}
+
+.account summary {
+  cursor: pointer;
+  color: #b4c9e9;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.account > button.secondary {
+  display: block;
+  margin-top: 14px;
+}
+
+.confirmation-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 16px;
+  line-height: 1.5;
+}
+
+.confirmation-consent input {
+  width: auto;
+  margin-top: 3px;
+}
+
+#alt-confirmation-settings > summary {
+  cursor: pointer;
+  font-weight: 650;
+}
+
+#alt-confirmation-form {
+  max-width: 680px;
+}
+
+@media (max-width: 700px) {
+  main {
+    padding: 24px 16px;
+  }
+
+  .accounts {
+    grid-template-columns: 1fr;
+  }
+
+  header,
+  .footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 29px;
+  }
+
+  .panel,
+  .account {
+    padding: 18px;
+  }
+
+  .record {
+    grid-template-columns: 1fr;
+  }
+
+  .inventory {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

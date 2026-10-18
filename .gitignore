@@ -1,0 +1,14 @@
+node_modules/
+data/
+*.log
+*.tmp
+.env
+.env.*
+!.env.example
+secrets/
+credentials.json
+*.maFile
+*.pem
+*.key
+.DS_Store
+Thumbs.db

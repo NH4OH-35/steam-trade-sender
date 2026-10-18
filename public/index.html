@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Steam Transfer Desk</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <span class="eyebrow">LOCAL · TWO ACCOUNTS · CS2</span>
+        <h1>Steam Transfer Desk</h1>
+        <p>Your items. Your accounts. Controlled transfers.</p>
+      </div>
+      <span id="connection" class="badge">Connecting…</span>
+    </header>
+
+    <div class="notice">Each selected item becomes a separate offer. Main sends require phone confirmation. Alt sends can use the optional setting below. The receiving account accepts only matching offers created here. Keep this app open while trading.</div>
+    <section aria-label="Steam accounts" id="accounts" class="accounts"></section>
+
+    <details class="panel" id="alt-confirmation-settings">
+      <summary>Alt → Main: outgoing auto-confirmation <span id="alt-confirmation-status" class="badge">Off</span></summary>
+      <p>When enabled, the app confirms its own queued Alt → Main sends after checking the recipient and exact item. Main-account sends remain manual. Enabling gives this program the alt’s confirmation authority.</p>
+      <p id="alt-confirmation-accounts" class="muted">Connect both accounts and pause the queue to configure.</p>
+      <form id="alt-confirmation-form">
+        <label>
+          Alt authenticator identity_secret
+          <input id="alt-identity-secret" type="password" autocomplete="off" spellcheck="false" maxlength="128" required placeholder="Base64 identity_secret from your existing alt authenticator backup">
+        </label>
+        <p class="muted">This is not a five-character Guard code. QR login cannot provide it. Enter only the alt’s existing identity_secret here, never in chat. It stays in memory and is cleared on sign-out or restart.</p>
+        <label class="confirmation-consent">
+          <input id="alt-confirmation-consent" type="checkbox" required>
+          Allow this app to confirm queued Alt → Main sends without tapping the alt’s phone.
+        </label>
+        <div class="toolbar">
+          <button id="enable-alt-confirmation">Enable for this session</button>
+        </div>
+      </form>
+      <button id="disable-alt-confirmation" class="secondary" type="button" hidden>Disable and forget secret</button>
+      <p class="muted">Disable pauses the queue. An already-submitted confirmation may finish. Other offers and Market listings are untouched.</p>
+    </details>
+
+    <section class="panel">
+      <div class="section-title">
+        <div>
+          <span class="eyebrow">01 / CHOOSE ITEMS</span>
+          <h2>Build a transfer</h2>
+        </div>
+        <span class="badge">CS2 inventory</span>
+      </div>
+      <div class="toolbar">
+        <label>
+          Direction
+          <select id="direction">
+            <option value="main">Main → Alt</option>
+            <option value="alt">Alt → Main</option>
+          </select>
+        </label>
+        <button id="load">Load inventory</button>
+        <label class="search">
+          Find an item
+          <input id="search" placeholder="Sticker, skin, case…">
+        </label>
+      </div>
+      <div class="toolbar small">
+        <button id="select" class="secondary">Select visible tradable</button>
+        <button id="deselect" class="secondary">Deselect all</button>
+        <span id="count">0 selected</span>
+      </div>
+      <div id="inventory" class="inventory">
+        <p class="muted">Connect both accounts, then load the sending inventory.</p>
+      </div>
+      <div class="footer">
+        <p>Trade-locked items and items already tracked in unresolved Steam offers are disabled. Return items by switching direction and loading inventory after Steam unlocks them.</p>
+        <button id="queue">Review selected items</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">
+        <div>
+          <span class="eyebrow">02 / SEND & CONFIRM</span>
+          <h2>Transfer queue</h2>
+        </div>
+        <span id="queue-status" class="badge">Paused</span>
+      </div>
+      <div class="toolbar">
+        <button id="resume">Start / resume queue</button>
+        <button id="pause" class="secondary">Pause</button>
+        <button id="clear" class="secondary">Clear unsent</button>
+        <button id="clear-queue" class="secondary">Clear transfer queue</button>
+        <button id="reconcile" class="secondary" disabled>Check Steam status</button>
+        <a href="/api/logs" download>Download activity log</a>
+        <span id="outstanding" class="badge">0 / 5 outstanding</span>
+      </div>
+      <p class="muted">Up to 5 app-created offers outstanding, including phone confirmations. Free slots refill without waiting for the other trades. Steam checks every 5 seconds, with automatic backoff on rate limits. Pausing cannot undo an operation already in progress.</p>
+      <div id="queue-error" class="error" role="alert" hidden></div>
+      <p id="reconcile-result" class="muted" role="status" hidden></p>
+      <div id="records"></div>
+      <section id="tracked-section" aria-labelledby="tracked-heading" hidden>
+        <h3 id="tracked-heading">Tracked unresolved Steam offers <span id="tracked-count" class="badge"></span></h3>
+        <p class="muted">Clearing moved these offers out of the queue; it did not cancel them. They reserve their items and count toward the five outstanding slots. New batches never automatically accept or confirm them. You can queue other items while these remain tracked.</p>
+        <p class="muted">Sign in to the recorded accounts and use <strong>Check Steam status</strong> to reconcile them without trading. If an offer is still open, finish or cancel it in Steam, then check again. For an uncertain send, use <strong>Link sent offer</strong> if needed. <a href="https://steamcommunity.com/my/tradeoffers/sent/" target="_blank" rel="noopener noreferrer">Open Steam sent offers ↗</a></p>
+        <div id="tracked-records"></div>
+      </section>
+    </section>
+
+    <div id="message" role="status" hidden></div>
+    <footer class="page-footer">Passwords, login codes, sessions, and optional alt authenticator credentials stay in this process; they are not saved by this app. Queue history is stored locally. Steam restrictions still apply. This app does not guarantee changes to your profile statistics.</footer>
+  </main>
+
+  <dialog id="review">
+    <h2>Review transfer</h2>
+    <p id="review-summary"></p>
+    <p id="review-accounts"></p>
+    <ul id="review-items"></ul>
+    <p>This queues one item per offer. Press Start / resume after reviewing the queue.</p>
+    <div class="toolbar">
+      <button id="confirm">Create queue</button>
+      <button id="cancel" class="secondary">Go back</button>
+    </div>
+  </dialog>
+</body>
+</html>

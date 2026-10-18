@@ -1,0 +1,22 @@
+{
+  "name": "two-account-steam-trader",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local two-account Steam item transfer dashboard",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "qrcode": "^1.5.4",
+    "steam-session": "^1.9.4",
+    "steam-totp": "^2.1.2",
+    "steam-user": "^5.2.0",
+    "steamcommunity": "^3.49.0",
+    "steam-tradeoffer-manager": "^2.12.0"
+  }
+}
